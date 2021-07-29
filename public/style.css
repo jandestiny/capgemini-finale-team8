@@ -1,2 +1,44 @@
+.header {
+  padding: 10px;
+  text-align: center;
+  background: #0e83b9;
+  color: white;
+  font-size: 30px;
+}
+
+.nav-bar {
+  list-style-type: none;
+  margin-left: 300;
+  padding: 0;
+}
+
+.profile-banner {
+  padding: top 100px;
+  border-radius: 100%;
+}
+
+.navbar ul li:first-child {
+  color: #f37335;
+}
+
+.glow {
+  font-size: 80px;
+  color: #fff;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e65c00,
+      0 0 40px #e65c00, 0 0 50px #e65c00, 0 0 60px #e65c00, 0 0 70px #e65c00;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff7f4d, 0 0 40px #ff7f4d,
+      0 0 50px #ff7f4d, 0 0 60px #ff7f4d, 0 0 70px #ff7f4d, 0 0 80px #ff7f4d;
+  }
+}
 
 
