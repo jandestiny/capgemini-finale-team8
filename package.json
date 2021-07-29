@@ -1,0 +1,31 @@
+{
+  "name": "expedition-capgemini-2021-finale",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "@chirimen/ccs811": "^1.0.1",
+    "ccs811-sensor": "^0.0.4",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "node-dht-sensor": "^0.4.3",
+    "nodemon": "^2.0.12"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jandestiny/expedition-capgemini-2021-finale.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jandestiny/expedition-capgemini-2021-finale/issues"
+  },
+  "homepage": "https://github.com/jandestiny/expedition-capgemini-2021-finale#readme",
+  "devDependencies": {
+    "@types/node": "^16.4.6"
+  }
+}
