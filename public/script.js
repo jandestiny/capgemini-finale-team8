@@ -10,5 +10,14 @@ function getNext10Posts(){
     let url = host + `/api/posts?date=${currentTime}&posts=${loadPosts+10}`
     loadPosts += 10
 
+    fetch(url)
+        .then(response => response.json())
+        .then(result => {
+            console.log(result)
+        })
+        .catch(function(error) {
+            console.log("Couldnt fetch rooms, trying again later..", error)
+        });
 
+    //Print api results to website
 }

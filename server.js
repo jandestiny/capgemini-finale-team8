@@ -5,11 +5,28 @@ const app = express()
 require('dotenv').config()
 const port = process.env.PORT || 3000
 
-var posts = []
+var posts = [
+  {
+    user: 'Capgemini-API',
+    timestamp: 1627579292,
+    content: `There's high power consumption in Room 'V', either it's full or someone left their notebook plugged in over night! <a href="/trends-detail.html?trend=power">#power</a> `
+  },
+  {
+    user: 'Capgemini-API',
+    timestamp: 1627579292,
+    content: `It's getting really hot in Room 'C', cooling please! <a href="/trends-detail.html?trend=temperature">#temperature</a> <a href="/trends-detail.html?trend=airconditioning">#airconditioning</a> `
+  },
+  {
+    user: 'Capgemini-API',
+    timestamp: 1627579292,
+    content: `The oxygen-levels are critically low in Room 'V', you should open the windows if possible! <a href="/trends-detail.html?trend=oxygen">#oxygen</a> `
+  }
+]
 
 app.set("view engine", "ejs")
 app.use(express.static(path.join(__dirname, "public")))
 
+get_and_analyze_live_data()
 
 
 app.get("/", (req, res) => {
@@ -17,10 +34,15 @@ app.get("/", (req, res) => {
 })
 
 app.get("/api/posts", (req, res) => {
-  let date = req.query.date
+  console.log("getting posts")
+  let unixtimestamp = req.query.unixtimestamp
   let no_of_posts = req.query.no_of_posts
+  console.log(unixtimestamp + "," + no_of_posts)
+  
+  filtered_posts = posts.slice(0, no_of_posts)
+  console.log("filter: " + filtered_posts)
 
-  //Get previous {no.of.posts} from {date} from db
+  return res.json(filtered_posts)
 })
 
 app.get("/api/posts/trend", (req, res) => {
@@ -28,6 +50,12 @@ app.get("/api/posts/trend", (req, res) => {
   let no_of_posts = req.query.no_of_posts
 
   //Get previous {no.of.posts} from {date} from db with {trend}
+})
+
+app.get("/update", (req, res) => {
+  get_and_analyze_live_data()
+  res.status(200)
+  res.end()
 })
 
 app.listen(port, () => console.log(`Listening on port ${port}`))
@@ -39,11 +67,18 @@ function get_and_analyze_live_data(){
   result = fetch(url)
   .then(response => response.json())
   .then(result => {
-    
+    rooms_analysis(result.rooms)
+    console.log(posts)
   })
   .catch(function(error) {
-
+    console.log("Couldnt fetch rooms, trying again later..", error)
   });
+}
+
+function rooms_analysis(rooms){
+  get_hottest_room(rooms)
+  get_coldest_room(rooms)
+  get_highest_power_consumption(rooms)
 }
 
 function get_hottest_room(rooms){
@@ -84,13 +119,23 @@ function get_highest_power_consumption(rooms){
   });
 
   if(highest_power_room.powerConsumption > 1.0){
-    create_post("Capgemini-API","There's a high power consumption in Room '" + highest_power_room.id + "', either it's full or someone left there notebook plugged in over night!", ["power"])
+    create_post("Capgemini-API","There's high power consumption in Room '" + highest_power_room.id + "', either it's full or someone left their notebook plugged in over night!", ["power"])
   }
 }
 
 function create_post(user, content, hashtags){
-  
-  posts.push()
+  posts.push({user:user, timestamp:getCurrentUnixTime(), content:content+wrapHashtagsInHtml(hashtags)})
+  posts = posts.sort((a,b) => b.timestamp - a.timestamp)
+}
+
+function wrapHashtagsInHtml(hashtags){
+  result = ""
+
+  hashtags.forEach(hashtag => {
+    result += ` <a href="/trends-detail.html?trend=${hashtag}">#${hashtag}</a> `
+  })
+
+  return result
 }
 
 function getCurrentUnixTime(){
