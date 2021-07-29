@@ -4,12 +4,10 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "@chirimen/ccs811": "^1.0.1",
-    "ccs811-sensor": "^0.0.4",
+    "bulma": "^0.9.3",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "node-dht-sensor": "^0.4.3",
     "nodemon": "^2.0.12"
   },
   "scripts": {
