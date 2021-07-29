@@ -25,8 +25,9 @@
     </div>
 
     <script>
-        paramsRaw = window.location.search
-        console.log(window.location.search)
+        var queryStrings = window.location.search
+        var urlParams = new URLSearchParams(queryString);
+        console.log(urlParams.get("trend"))
     </script>
 </body>
 </html>
