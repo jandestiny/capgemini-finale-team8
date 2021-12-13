@@ -7,4 +7,4 @@ Each post is described with a hashtag and every hashtag can be followed/subscrib
 
 All of the posts are visible in a combined feed, where you can either see all posts or only your "subscribed" topics.
 
-That way, humans can literally read about whats happening in the smart office in real time and have it visualized in a familiar, modern way.
+That way, humans can read about whats happening in the smart office in real time and have it visualized in a familiar, modern way.
