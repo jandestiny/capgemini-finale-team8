@@ -3,6 +3,7 @@ const path = require("path");
 const fetch = require('node-fetch');
 const app = express()
 require('dotenv').config()
+const host = process.env.HOSTNAME || "localhost"
 const port = process.env.PORT || 3000
 
 var posts = [
@@ -58,11 +59,11 @@ app.get("/update", (req, res) => {
   res.end()
 })
 
-app.listen(port, () => console.log(`Listening on port ${port}`))
+app.listen(port, () => console.info(`\nRunning on: http://${host}:${port}/ (Ctrl+Click to open)\n`))
 
 
 function get_and_analyze_live_data(){
-  let url = "https://rvj6rnbpxj.execute-api.eu-central-1.amazonaws.com/prod/live-data"
+  let url = process.env.CAPGEMINIMOCKAPI || ""
 
   result = fetch(url)
   .then(response => response.json())
@@ -71,7 +72,8 @@ function get_and_analyze_live_data(){
     console.log(posts)
   })
   .catch(function(error) {
-    console.log("Couldnt fetch rooms, trying again later..", error)
+    // console.log("Couldnt fetch rooms, trying again later..", error)
+    console.log("Could not fetch mocked data API, defaulting to exemplary posts..")
   });
 }
 
